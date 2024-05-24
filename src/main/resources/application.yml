@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: message-broker
+
+server:
+  port: 8085

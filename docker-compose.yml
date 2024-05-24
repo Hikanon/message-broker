@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+#  message-broker:
+#    build: ./
+#    depends_on:
+#      - kafka
+#    ports:
+#      - "8085:8085"
+  zookeeper:
+    restart: always
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    restart: always
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "test_topic:1:1"
+  postgtres_db:
+    restart: always
+    image: postgres
+    ports:
+      - "5432:5432"
